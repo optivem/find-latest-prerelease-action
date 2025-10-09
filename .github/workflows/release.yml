@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          body: |
+            ## Changes in this release
+            
+            See the [commit history](https://github.com/${{ github.repository }}/commits/${{ github.ref }}) for detailed changes.
+            
+            ## Usage
+            
+            ```yaml
+            - name: Find Latest Prerelease
+              uses: optivem/find-latest-prerelease-action@${{ github.ref }}
+              with:
+                repo-owner: 'your-org'
+                repo-name: 'your-repo'
+            ```
+
+  update-major-tag:
+    runs-on: ubuntu-latest
+    needs: release
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Update major version tag
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          MAJOR_VERSION=$(echo $TAG | cut -d. -f1)
+          
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Delete existing major version tag if it exists
+          git tag -d $MAJOR_VERSION || true
+          git push origin :refs/tags/$MAJOR_VERSION || true
+          
+          # Create new major version tag
+          git tag $MAJOR_VERSION
+          git push origin $MAJOR_VERSION

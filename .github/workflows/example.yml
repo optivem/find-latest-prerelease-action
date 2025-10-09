@@ -1,0 +1,58 @@
+# Example workflow showing how to use the Find Latest Prerelease Action
+
+name: Example Usage
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run daily at 9 AM UTC
+    - cron: '0 9 * * *'
+
+jobs:
+  check-prereleases:
+    runs-on: ubuntu-latest
+    name: Check for Latest Prereleases
+    
+    outputs:
+      vscode-prerelease: ${{ steps.vscode.outputs.latest-prerelease }}
+      dotnet-prerelease: ${{ steps.dotnet.outputs.latest-prerelease }}
+    
+    steps:
+      - name: Find VSCode Prerelease
+        id: vscode
+        uses: optivem/find-latest-prerelease-action@v1
+        with:
+          repo-owner: 'microsoft'
+          repo-name: 'vscode'
+          limit: '20'
+      
+      - name: Find .NET Prerelease
+        id: dotnet
+        uses: optivem/find-latest-prerelease-action@v1
+        with:
+          repo-owner: 'dotnet'
+          repo-name: 'core'
+          limit: '15'
+      
+      - name: Display Results
+        run: |
+          echo "📋 Latest Prereleases Found:"
+          echo "VSCode: ${{ steps.vscode.outputs.latest-prerelease }}"
+          echo ".NET: ${{ steps.dotnet.outputs.latest-prerelease }}"
+
+  use-prereleases:
+    runs-on: ubuntu-latest
+    needs: check-prereleases
+    name: Use Prerelease Versions
+    
+    steps:
+      - name: Use the prerelease versions in your workflow
+        run: |
+          echo "Using VSCode prerelease: ${{ needs.check-prereleases.outputs.vscode-prerelease }}"
+          echo "Using .NET prerelease: ${{ needs.check-prereleases.outputs.dotnet-prerelease }}"
+          
+          # Example: You could use these versions to:
+          # - Download and test the prerelease versions
+          # - Update configuration files
+          # - Trigger other workflows
+          # - Send notifications about new prereleases

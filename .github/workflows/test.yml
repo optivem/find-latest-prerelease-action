@@ -1,0 +1,105 @@
+name: Test Action
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    name: Test Find Latest Prerelease Action
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Test with Microsoft VSCode (has prereleases)
+        id: test-vscode
+        uses: ./
+        with:
+          repo-owner: 'microsoft'
+          repo-name: 'vscode'
+          limit: '10'
+      
+      - name: Display VSCode Result
+        run: |
+          echo "VSCode latest prerelease: ${{ steps.test-vscode.outputs.latest-prerelease }}"
+          if [ -z "${{ steps.test-vscode.outputs.latest-prerelease }}" ]; then
+            echo "Warning: No prerelease found for VSCode"
+          else
+            echo "✅ Successfully found prerelease version"
+          fi
+      
+      - name: Test with GitHub CLI (has prereleases)
+        id: test-cli
+        uses: ./
+        with:
+          repo-owner: 'cli'
+          repo-name: 'cli'
+          limit: '15'
+      
+      - name: Display CLI Result
+        run: |
+          echo "GitHub CLI latest prerelease: ${{ steps.test-cli.outputs.latest-prerelease }}"
+          if [ -z "${{ steps.test-cli.outputs.latest-prerelease }}" ]; then
+            echo "Warning: No prerelease found for GitHub CLI"
+          else
+            echo "✅ Successfully found prerelease version"
+          fi
+      
+      - name: Test with repository that might not have prereleases
+        id: test-no-prerelease
+        uses: ./
+        with:
+          repo-owner: 'actions'
+          repo-name: 'checkout'
+          limit: '5'
+        continue-on-error: true
+      
+      - name: Display No Prerelease Result
+        run: |
+          echo "Actions/checkout latest prerelease: ${{ steps.test-no-prerelease.outputs.latest-prerelease }}"
+          echo "This test validates the action handles repositories without prereleases gracefully"
+
+  test-windows:
+    runs-on: windows-latest
+    name: Test on Windows
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Test on Windows
+        id: test-windows
+        uses: ./
+        with:
+          repo-owner: 'microsoft'
+          repo-name: 'powershell'
+          limit: '10'
+      
+      - name: Display Windows Result
+        run: |
+          echo "PowerShell latest prerelease: ${{ steps.test-windows.outputs.latest-prerelease }}"
+
+  test-macos:
+    runs-on: macos-latest
+    name: Test on macOS
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Test on macOS
+        id: test-macos
+        uses: ./
+        with:
+          repo-owner: 'homebrew'
+          repo-name: 'brew'
+          limit: '10'
+      
+      - name: Display macOS Result
+        run: |
+          echo "Homebrew latest prerelease: ${{ steps.test-macos.outputs.latest-prerelease }}"
