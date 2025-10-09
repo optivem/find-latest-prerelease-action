@@ -24,7 +24,6 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
-          limit: '20'
       
       - name: Find .NET Prerelease
         id: dotnet
@@ -32,7 +31,6 @@ jobs:
         with:
           repo-owner: 'dotnet'
           repo-name: 'core'
-          limit: '15'
       
       - name: Display Results
         run: |

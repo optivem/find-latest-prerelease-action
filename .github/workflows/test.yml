@@ -22,7 +22,6 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
-          limit: '10'
       
       - name: Display VSCode Result
         run: |
@@ -39,7 +38,6 @@ jobs:
         with:
           repo-owner: 'cli'
           repo-name: 'cli'
-          limit: '15'
       
       - name: Display CLI Result
         run: |
@@ -56,7 +54,6 @@ jobs:
         with:
           repo-owner: 'actions'
           repo-name: 'checkout'
-          limit: '5'
         continue-on-error: true
       
       - name: Display No Prerelease Result
@@ -78,7 +75,6 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'powershell'
-          limit: '10'
       
       - name: Display Windows Result
         run: |
@@ -98,7 +94,6 @@ jobs:
         with:
           repo-owner: 'homebrew'
           repo-name: 'brew'
-          limit: '10'
       
       - name: Display macOS Result
         run: |

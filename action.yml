@@ -12,10 +12,6 @@ inputs:
   repo-name:
     description: 'Repository name'
     required: true
-  limit:
-    description: 'Number of releases to check (default: 20)'
-    required: false
-    default: '20'
 
 outputs:
   latest-prerelease:
@@ -29,4 +25,4 @@ runs:
       id: find
       shell: pwsh
       run: |
-        & "${{ github.action_path }}/action.ps1" -RepoOwner "${{ inputs.repo-owner }}" -RepoName "${{ inputs.repo-name }}" -Limit ${{ inputs.limit }}
+        & "${{ github.action_path }}/action.ps1" -RepoOwner "${{ inputs.repo-owner }}" -RepoName "${{ inputs.repo-name }}"

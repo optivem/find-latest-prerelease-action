@@ -3,10 +3,7 @@ param(
     [string]$RepoOwner,
     
     [Parameter(Mandatory = $true)]
-    [string]$RepoName,
-    
-    [Parameter(Mandatory = $false)]
-    [int]$Limit = 20
+    [string]$RepoName
 )
 
 # Set error action preference to stop on errors
@@ -24,12 +21,8 @@ try {
         throw "Repository name cannot be empty"
     }
     
-    if ($Limit -le 0) {
-        throw "Limit must be a positive integer"
-    }
-    
     $repo = "$RepoOwner/$RepoName"
-    Write-Host "📋 Checking last $Limit releases..."
+    Write-Host "📋 Looking for the latest prerelease..."
     
     # Check if gh CLI is available
     if (-not (Get-Command "gh" -ErrorAction SilentlyContinue)) {
@@ -37,7 +30,7 @@ try {
     }
     
     # Get releases and find the first prerelease
-    $releases = gh release list --repo $repo --limit $Limit 2>&1
+    $releases = gh release list --repo $repo --limit 1 2>&1
     
     if ($LASTEXITCODE -ne 0) {
         throw "Failed to fetch releases: $releases"
@@ -46,7 +39,7 @@ try {
     $prereleaseLine = $releases | Select-String 'Pre-release' | Select-Object -First 1
     
     if (-not $prereleaseLine) {
-        Write-Host "⚠️  No prerelease found in the last $Limit releases"
+        Write-Host "⚠️  The latest release is not a prerelease"
         $tag = ""
     } else {
         Write-Host "📝 Found prerelease line: $prereleaseLine"

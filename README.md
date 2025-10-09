@@ -11,7 +11,6 @@ A GitHub Action to find the latest prerelease version of a repository.
   with:
     repo-owner: 'your-org'
     repo-name: 'your-repo'
-    limit: '20'  # optional, defaults to 20
 
 - name: Use the prerelease version
   run: echo "Latest prerelease: ${{ steps.find-prerelease.outputs.latest-prerelease }}"
@@ -23,13 +22,12 @@ A GitHub Action to find the latest prerelease version of a repository.
 |------|-------------|----------|---------|
 | `repo-owner` | Repository owner (organization or username) | Yes | - |
 | `repo-name` | Repository name | Yes | - |
-| `limit` | Number of releases to check | No | `20` |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| `latest-prerelease` | Tag name of the latest prerelease version |
+| `latest-prerelease` | Tag name of the latest prerelease version (empty if latest release is not a prerelease) |
 
 ## Requirements
 
@@ -53,7 +51,6 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
-          limit: '10'
       
       - name: Display Result
         run: |

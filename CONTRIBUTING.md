@@ -23,7 +23,7 @@ Thank you for your interest in contributing to this project! We welcome contribu
 You can test the PowerShell script locally:
 
 ```powershell
-.\action.ps1 -RepoOwner "microsoft" -RepoName "vscode" -Limit 10
+.\action.ps1 -RepoOwner "microsoft" -RepoName "vscode"
 ```
 
 ### Testing the Action
