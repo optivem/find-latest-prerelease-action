@@ -11,6 +11,7 @@ A GitHub Action to find the latest prerelease version of a repository.
   with:
     repo-owner: 'your-org'
     repo-name: 'your-repo'
+    token: ${{ github.token }}  # GitHub token (optional, defaults to github.token)
 
 - name: Use the prerelease version
   run: echo "Latest prerelease: ${{ steps.find-prerelease.outputs.latest-prerelease }}"
@@ -22,6 +23,7 @@ A GitHub Action to find the latest prerelease version of a repository.
 |------|-------------|----------|---------|
 | `repo-owner` | Repository owner (organization or username) | Yes | - |
 | `repo-name` | Repository name | Yes | - |
+| `token` | GitHub token for authentication | No | `${{ github.token }}` |
 
 ## Outputs
 
@@ -51,6 +53,7 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
+          token: ${{ github.token }}
       
       - name: Display Result
         run: |

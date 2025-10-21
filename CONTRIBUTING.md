@@ -20,9 +20,11 @@ Thank you for your interest in contributing to this project! We welcome contribu
 
 ### Testing Locally
 
-You can test the PowerShell script locally:
+You can test the PowerShell script locally (requires GitHub CLI and authentication):
 
 ```powershell
+# Set your GitHub token (get from GitHub settings > Developer settings > Personal access tokens)
+$env:GH_TOKEN = "your_github_token_here"
 .\action.ps1 -RepoOwner "microsoft" -RepoName "vscode"
 ```
 

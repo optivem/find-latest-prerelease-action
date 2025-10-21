@@ -29,7 +29,13 @@ try {
         throw "GitHub CLI (gh) is not available. Please ensure it's installed and in PATH."
     }
     
+    # Check if GH_TOKEN is set
+    if ([string]::IsNullOrWhiteSpace($env:GH_TOKEN)) {
+        throw "GH_TOKEN environment variable is not set. Please provide a GitHub token for authentication."
+    }
+    
     # Get releases and find the first prerelease
+    Write-Host "🔑 Using GitHub token for authentication..."
     $releases = gh release list --repo $repo --limit 1 2>&1
     
     if ($LASTEXITCODE -ne 0) {

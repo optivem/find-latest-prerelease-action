@@ -22,6 +22,7 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
+          token: ${{ github.token }}
       
       - name: Display VSCode Result
         run: |
@@ -38,6 +39,7 @@ jobs:
         with:
           repo-owner: 'cli'
           repo-name: 'cli'
+          token: ${{ github.token }}
       
       - name: Display CLI Result
         run: |
@@ -54,6 +56,7 @@ jobs:
         with:
           repo-owner: 'actions'
           repo-name: 'checkout'
+          token: ${{ github.token }}
         continue-on-error: true
       
       - name: Display No Prerelease Result
@@ -75,6 +78,7 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'powershell'
+          token: ${{ github.token }}
       
       - name: Display Windows Result
         run: |
@@ -94,6 +98,7 @@ jobs:
         with:
           repo-owner: 'homebrew'
           repo-name: 'brew'
+          token: ${{ github.token }}
       
       - name: Display macOS Result
         run: |

@@ -12,6 +12,10 @@ inputs:
   repo-name:
     description: 'Repository name'
     required: true
+  token:
+    description: 'GitHub token for authentication'
+    required: false
+    default: ${{ github.token }}
 
 outputs:
   latest-prerelease:
@@ -24,5 +28,7 @@ runs:
     - name: Find Latest Prerelease Tag
       id: find
       shell: pwsh
+      env:
+        GH_TOKEN: ${{ inputs.token }}
       run: |
         & "${{ github.action_path }}/action.ps1" -RepoOwner "${{ inputs.repo-owner }}" -RepoName "${{ inputs.repo-name }}"

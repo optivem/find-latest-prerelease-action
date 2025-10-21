@@ -24,6 +24,7 @@ jobs:
         with:
           repo-owner: 'microsoft'
           repo-name: 'vscode'
+          token: ${{ github.token }}
       
       - name: Find .NET Prerelease
         id: dotnet
@@ -31,6 +32,7 @@ jobs:
         with:
           repo-owner: 'dotnet'
           repo-name: 'core'
+          token: ${{ github.token }}
       
       - name: Display Results
         run: |
