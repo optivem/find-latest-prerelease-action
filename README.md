@@ -1,5 +1,9 @@
 # Find Latest Prerelease Action
 
+[![Example Usage](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/example.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/example.yml)
+[![Test Action](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/test.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/test.yml)
+[![Release](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml)
+
 A GitHub Action to find the latest prerelease version of a repository.
 
 ## Usage
