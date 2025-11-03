@@ -5,6 +5,7 @@
 [![Release](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml)
 
 [![GitHub release](https://img.shields.io/github/release/optivem/find-latest-prerelease-action.svg)](https://github.com/optivem/find-latest-prerelease-action/releases)
+[![GitHub](https://img.shields.io/github/license/optivem/find-latest-prerelease-action)](LICENSE)
 
 A GitHub Action to find the latest prerelease version of a repository.
 
