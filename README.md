@@ -4,6 +4,8 @@
 [![Test Action](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/test.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/test.yml)
 [![Release](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/release.yml)
 
+[![GitHub release](https://img.shields.io/github/release/optivem/find-latest-prerelease-action.svg)](https://github.com/optivem/find-latest-prerelease-action/releases)
+
 A GitHub Action to find the latest prerelease version of a repository.
 
 ## Usage
