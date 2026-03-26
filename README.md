@@ -1,3 +1,6 @@
+> [!WARNING]
+> This action has moved to [optivem/actions](https://github.com/optivem/actions). Use `optivem/actions/find-latest-prerelease@v1` instead.
+
 # Find Latest Prerelease Action
 
 [![Example Usage](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/example.yml/badge.svg)](https://github.com/optivem/find-latest-prerelease-action/actions/workflows/example.yml)
